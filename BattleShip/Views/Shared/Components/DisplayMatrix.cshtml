@@ -1,0 +1,33 @@
+<div class="board">
+    <div class="row-table">
+        <button class="btn btn-sm btn-link disabled"></button>
+        @for (char i = 'A'; i <= 'J'; i++)
+        {
+            <button class="btn btn-sm btn-link disabled">@i</button>
+        }
+    </div>
+    @for (int i = 0; i < 10; i++)
+    {
+        <div class="row-table">
+            <button class="btn btn-sm btn-link disabled">@(i+1)</button>
+            @for (int j = 0; j < 10; j++)
+            {
+                @if(Model.Player == "computer")
+                {
+                    <a asp-controller="Home" asp-action="Fire" asp-route-x="@i" asp-route-y="@j">
+                        <button class="btn btn-sm btn-@(Model.Matrix[i, j] == 5 ? "danger" : "secondary")"
+                            disabled="@(Model.Matrix[i, j] > 3)" >
+                        </button>
+                    </a>
+                } 
+                @if(Model.Player == "player")
+                {
+                    <button class="btn btn-sm btn-@(Model.Matrix[i, j] == 0 ? "secondary" : Model.Matrix[i, j] <= 3 ? "primary" : 
+                        Model.Matrix[i, j] == 5 ? "danger" : "secondary")" disabled="@(Model.Matrix[i, j] > 3)">
+                    </button>
+                }
+                
+            }
+        </div>
+    }
+</div>

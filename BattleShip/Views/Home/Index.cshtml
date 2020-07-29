@@ -1,0 +1,30 @@
+﻿<div class="game-container">
+    <div class="computer">
+        <h5>Computer's Board</h5>
+        @await Component.InvokeAsync("DisplayMatrix", new { matrix =  Model.Computer, player = "computer" })
+    </div>
+    
+    <div class="player">
+        <h5>Player's Board</h5>
+        @await Component.InvokeAsync("DisplayMatrix", new { matrix =  Model.Player, player = "player" })
+    </div>
+    
+</div>
+
+@section scripts 
+{
+    <script type="text/javascript">
+  
+        var ship_message = '@ViewBag.Ship';
+
+        if(ship_message.length > 0 && ship_message.length < 16){
+             
+            toastr.error(ship_message,  {timeOut: 2500} );
+
+        } 
+        else if(ship_message.length > 0){
+            toastr.warning(ship_message,  {timeOut: 2500} );
+        }
+
+    </script>
+}
